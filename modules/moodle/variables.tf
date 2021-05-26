@@ -27,6 +27,16 @@ variable "shape" {
   default     = "VM.Standard2.1"
 }
 
+variable "flex_shape_ocpus" {
+  description = "Flex Instance shape OCPUs"
+  default = 1
+}
+
+variable "flex_shape_memory" {
+  description = "Flex Instance shape Memory (GB)"
+  default = 6
+}
+
 variable "label_prefix" {
   description = "To create unique identifier for multiple clusters in a compartment."
   default     = ""
@@ -97,4 +107,12 @@ variable "dedicated" {
   description = "Create a dedicated user and a dedicated database for each Webservers"
   type        = bool
   default     = false
+}
+
+dynamic "shape_config" {
+    for_each = local.is_flexible_node_shape ? [1] : []
+    content {
+      memory_in_gbs = var.flex_shape_memory
+      ocpus = var.flex_shape_ocpus
+    }
 }
