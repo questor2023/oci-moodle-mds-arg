@@ -1,7 +1,7 @@
 title: "Moodle on OCI with MDS"
 description: "Moodle on OCI with MySQL Database Service"
-schemaVersion: 1.2.0
-version: "20210905"
+schemaVersion: 1.3.0
+version: "202306301"
 locale: "en"
 
 
@@ -15,6 +15,12 @@ variableGroups:
       - ssh_authorized_keys_path
       - ssh_private_key_path
       - private_key_path
+      - dns_label
+      - label_prefix
+      - fingerprint
+      - node_image_id
+      - user_ocid
+
 
   - title: Required Variables
     visible: true
@@ -45,7 +51,7 @@ variableGroups:
     variables:
       - node_shape
       - node_flex_shape_ocpus
-      - node_flex_shape_memor
+      - node_flex_shape_memory
       - mysql_shape
 
   - title: Network
@@ -134,6 +140,12 @@ variables:
           - eq:
             - node_shape
             - "VM.Optimized3.Flex"
+          - eq:
+            - node_shape
+            - "VM.Standard.Ampere.Generic"
+          - eq:
+            - node_shape
+            - "VM.Standard.Intel.Generic"
 
   node_flex_shape_ocpus:
     type: number
@@ -159,6 +171,12 @@ variables:
           - eq:
             - node_shape
             - "VM.Optimized3.Flex"
+          - eq:
+            - node_shape
+            - "VM.Standard.Ampere.Generic"
+          - eq:
+            - node_shape
+            - "VM.Standard.Intel.Generic"
             
   existing_vcn_ocid:
     type: oci:core:vcn:id
@@ -297,3 +315,31 @@ variables:
     required: true
     title: MySQL Moodle Schema
     description: MySQL Schema/Database for Moodle
+
+outputGroups:
+- title: "Services IP"
+  outputs:
+    - moodle_public_ip
+    - mds_instance_ip
+- title: "Moodle Database Credentials"
+  outputs:
+    - moodle_name
+    - moodle_password
+- title: "SSH Private Key"
+  outputs:
+    - ssh_private_key
+
+outputs:
+  moodle_public_ip:
+    title: "Your new deployed Moodle"
+  mds_instance_ip:
+    title: "MySQL Database Service Private IP"
+  moodle_name:
+    title: "Moodle MySQL User"
+  moodle_password:
+    title: "Moodle MySQL User's Password"
+    sensitive: true
+  ssh_private_key:
+    title: "Generated SSH private key"
+    sensitive: true
+                          

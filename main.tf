@@ -19,7 +19,7 @@ locals {
 data "oci_core_images" "images_for_shape" {
     compartment_id = var.compartment_ocid
     operating_system = "Oracle Linux"
-    operating_system_version = "8"
+    operating_system_version = "9"
     shape = var.node_shape
     sort_by = "TIMECREATED"
     sort_order = "DESC"

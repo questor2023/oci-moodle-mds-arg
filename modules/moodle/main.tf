@@ -2,10 +2,10 @@
 # Init Script Files
 
 locals {
-  php_script      = "~/install_php74.sh"
-  moodle_script       = "~/install_moodle.sh"
-  security_script = "~/configure_local_security.sh"
-  create_moodle_db    = "~/create_moodle_db.sh"
+  php_script      = "/home/opc/install_php74.sh"
+  moodle_script       = "/home/opc/install_moodle.sh"
+  security_script = "/home/opc/configure_local_security.sh"
+  create_moodle_db    = "/home/opc/create_moodle_db.sh"
   fault_domains_per_ad = 3
 }
 

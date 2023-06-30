@@ -19,10 +19,13 @@ echo "MySQL Shell successfully installed !"
 if [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el8" ]]
 then
   dnf -y module enable php:remi-7.4
-  dnf -y install php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
-else
+  dnf -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
+elif [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el9" ]]
+then
+  dnf -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mbstring php-xml php-json php-bcmath php-intl php-soap php-opcache
+else	
   yum-config-manager --enable remi-php74
-  yum -y install php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
+  yum -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
 fi
 
 echo "MySQL Shell & PHP successfully installed !"

@@ -1,5 +1,5 @@
 output "moodle_public_ip" {
-  value = module.moodle.public_ip
+  value = "http://${module.moodle.public_ip}"
 }
 
 output "moodle_db_user" {
@@ -8,6 +8,7 @@ output "moodle_db_user" {
 
 output "moodle_db_password" {
   value = var.moodle_password
+  sensitive = true
 }
 
 output "mds_instance_ip" {
