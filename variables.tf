@@ -98,7 +98,7 @@ variable "node_image_id" {
 
 variable "node_shape" {
   description = "Instance shape to use for master instance. "
- default     = "VM.Standard.E2.1"
+ default     = "VM.Standard.A1.Flex"
 }
 
 variable "node_flex_shape_ocpus" {
