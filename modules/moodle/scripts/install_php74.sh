@@ -22,7 +22,11 @@ then
   dnf -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
 elif [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el9" ]]
 then
-  dnf -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mbstring php-xml php-json php-bcmath php-intl php-soap php-opcache
+  dnf -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mbstring php-xml php-json php-bcmath php-intl php-soap php-opcache php-sodium php-pear php-devel
+  pecl config-set preferred_state beta
+  pecl install xmlrpc
+  echo "extension=xmlrpc.so" > /etc/php.d/50-xmlrpc.ini
+  pecl config-set preferred_state stable
 else	
   yum-config-manager --enable remi-php74
   yum -y install httpd php php-cli php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json php-bcmath php-intl php-xmlrpc php-soap php-opcache
