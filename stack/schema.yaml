@@ -34,7 +34,7 @@ variableGroups:
       - moodle_schema
 
   - title: Use HA for MDS
-    visibale: true
+    visible: false
     variables:
       - deploy_mds_ha
 
